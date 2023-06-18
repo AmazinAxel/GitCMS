@@ -125,7 +125,7 @@ a:hover, header h1:hover { color: #292929 }
 a:active, header h1:active { color: #4b4b4b }
 
 /* Main app styling */
-.main { display: flex; gap: 10px; height: calc(100vh - 143px); }
+.main { display: flex; gap: 10px; height: calc(100vh - 150px); }
 #repository-content { 
   height: 100%; 
   background-color: white; 
