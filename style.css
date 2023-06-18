@@ -1,0 +1,218 @@
+/* Just like the scripts.js file, this code is made in a rush (in about 3 days) so this code really good.
+It has many problems, bad coding practices (such as the use of !important) and more, even though I can fix
+them but I just don't feel like it. Maybe one day I'll come back to this project and clean everything up, 
+but right now I'm just leaving this as is. Some parts of this code is fantastic and greatly optimized,
+however, it really does just need a good refactoring. Good luck reading this! */
+
+/* Main body styles */
+body { 
+  font-family: 'Montserrat', 'Source Sans', sans-serif;
+  background: rgb(226,227,244);
+  background: linear-gradient(180deg, rgba(226,227,244,1) 0%, rgba(194,199,243,1) 100%);
+  height: 100%;
+  overflow: hidden;
+  padding: 15px;
+  background-attachment: fixed;
+}
+
+button { 
+  background: linear-gradient(101deg, rgba(58,156,235,1) 0%, rgba(54,161,234,1) 100%);
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 6px;
+  box-shadow: 1px 2px 9px #1884d1;
+  cursor: pointer;
+  transition: box-shadow .3s ease, transform .2s ease;
+  font-family: 'Montserrat', 'Source Sans', sans-serif;
+}
+button:hover {
+  box-shadow: 2px 4px 15px 0px #1884d1;
+  transform: translate(0, -2px);
+}
+button:active {
+  box-shadow: 1px 1px 9px 0px #1884d1;
+  transform: translate(0, 2px);
+}
+
+input {
+  font-family: 'Montserrat', 'Source Sans', sans-serif;
+  background: linear-gradient(101deg, rgba(58,156,235,1) 0%, rgba(54,161,234,1) 100%);
+  border: 0;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 2px 4px 9px #1884d18c;
+  transition: box-shadow .3s ease, transform .2s ease;
+  width: 236px;
+}
+button img { width: 20px; position: relative; width: 25px; }
+#enterRepo { position: relative; top: 8px; }
+input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; transform: translate(0, -1px); }
+::placeholder { color: #d0e6fa; }
+
+.wrapper { 
+  background-color: #ffffffad;
+  padding: 15px;
+  border-radius: 10px;
+  height: 140px;
+  transition: height .4s cubic-bezier(0.5, 0, 0, 1);
+  overflow: hidden;
+}
+.open.wrapper { height: calc(100vh - 30px); }
+
+#selectRepoWrapper, #loginText { 
+  text-align: center; 
+  transition: transform .4s cubic-bezier(0.5, 0, 0, 1), opacity .4s ease, visibility .4s, height .4s cubic-bezier(0.5, 0, 0, 1), margin .4s cubic-bezier(0.5, 0, 0, 1);
+  transform: translate(0, 20px); 
+  opacity: 0; 
+  visibility: hidden; 
+  height: 0px; 
+  margin-top: 10px;
+}
+#selectRepoWrapper.show, #loginText.show { opacity: 1; transform: translate(0, 0); visibility: visible; height: 20px; }
+
+.saveBtn, .main { 
+  visibility: visible;
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: transform .4s cubic-bezier(0.5, 0, 0, 1), opacity .4s ease, visibility .4s, box-shadow .4s ease;
+ }
+ .hidden.saveBtn, .hidden.main, .hidden#changeThemeBtn, .hidden#username { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
+
+ .saveBtn { margin-left: auto; display: flex; justify-content: flex-end; margin-bottom: 10px; margin-top: 5px; }
+ .saveBtn img { position: relative; top: 0; }
+ #changeThemeBtn { position: absolute; top: 95px; }
+
+
+
+/* Header styling */
+header { height: 30px; display: flex; align-items: flex-start; padding-bottom: 30px; }
+header h1 { flex: 0%; cursor: pointer; }
+#profileImg { 
+  width: 25px;
+  margin-right: 5px;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px black;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+#username { margin: 3px 7px 0 0; visibility: visible; transform: translate(0, 0px); opacity: 1; transition: visibility .6s, transform .6s cubic-bezier(0, 0, 0, 1), opacity .6s cubic-bezier(0, 0, 0, 1); }
+header h2 { 
+  position: absolute;
+  color: rgb(121, 121, 121);
+  font-size: 15px;
+  top: 65px;
+  font-weight: normal;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+header h2:hover { color: #585858; }
+header h2:active { color: #464646 }
+#github { padding-right: 3px; transition: transform .3s ease; }
+#github:hover { transform: translate(0, -3px); }
+#github:active { transform: translate(0, 2px); }
+
+#profileImg:hover { transform: translate(0, -3px); box-shadow: 1px 4px 7px 0px #a3a3a3; }
+#profileImg:active { transform: translate(0, 2px); box-shadow: 1px 1px 7px 0px #a3a3a3; }
+
+#logout-button, #login-button { transition: transform .2s ease; transform: translate(0px, 0px); }
+#logout-button:hover, #login-button:hover { transform: translate(2px, 0); }
+#logout-button:active, #login-button:active { transform: translate(5px, 0); }
+
+a, header h1 { color: black; transition: color .2s ease; text-decoration: none; }
+a:hover, header h1:hover { color: #292929 }
+a:active, header h1:active { color: #4b4b4b }
+
+/* Main app styling */
+.main { display: flex; gap: 10px; height: calc(100vh - 143px); }
+#repository-content { 
+  height: 100%; 
+  background-color: white; 
+  padding: 5px 10px 10px 10px;
+  border-radius: 5px; 
+  overflow: overlay;
+  flex: 20%;
+}
+
+.dropdown { cursor: pointer; list-style-type: disclosure-closed; }
+.dropdown-content {
+  transition: height .5s ease; 
+  display: block; height: 0%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0, 1, 0.25, 1);
+}
+  
+.dropdown-content:not(li) {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(1, 0, 1, 1);
+}
+ul.dropdown-content:not(.show) { transition: all 0.3s cubic-bezier(0, 0.7, 0.7, 1); }
+li.dropdown.dirOpen > .dropdown-content:not(li) { max-height: 500px; opacity: 1; display: block; }
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.dropdown-content.show li { animation: slideIn .3s ease; }
+@keyframes topSlideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+    
+.dirOpen { list-style-type: disclosure-open; }
+#file-contents { 
+  display: none;
+  resize: none;
+  height: -webkit-fill-available;
+  border: 0;
+  border-radius: 6px;
+  transform: translate(0px, 0px);
+  transition: transform .3s ease, box-shadow .3s ease;    
+  box-shadow: 1px 1px 7px 0px #cdcdcd;
+  width: 100%;
+  padding: 10px;
+}
+.itemSelected { font-weight: bold; }
+#file-contents:focus { outline: none; transform: translate(0px, -3px); box-shadow: 1px 4px 7px 0px #a3a3a3; }
+ul { padding-left: 15px; }
+textarea { font-family: 'Source Code Pro', monospace; }
+.editArea { width: 100%; opacity: 0; transition: opacity .3s ease, transform .3s ease; transform: translate(10px, 0); flex: 80%; }
+.showEditArea { opacity: 1; transform: translate(0px, 0); animation: slideIn 0.5s ease; }
+li { cursor: pointer; }
+.CodeMirror { height: calc(100% - 50px); } /* Markdown Editor */
+.editor-statusbar { display: none; } /* Markdown Editor */
+.editor-toolbar, .CodeMirror { box-shadow: 1px 4px 7px 0px #a3a3a3; } /* Markdown Editor */
+.codeflask { width: calc(100% - 190px)!important; border-radius: 8px; box-shadow: 1px 4px 7px 0px #a3a3a3; width: -webkit-fill-available!important; } /* Code Editor */
+img { max-width: 100%; }
+object { max-width: 50%; }
+
+
+/* Reset all styles (mostly minifed) */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; backface-visibility: hidden; -webkit-font-smoothing: subpixel-antialiased; }
+hr { height: 0; }
+code, kbd, samp, pre { font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 1em; color: var(--complimentary); transition: color .2s ease; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+button, input, select, textarea { line-height: 1.15; }
+button, select { text-transform: none; }
+* { margin: 0; }
+img, video { display: block; max-width: 100%; }
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; color: var(--complimentary); transition: color .2s ease; }
+
+@media(max-width: 900px) {
+  .main { display: unset; }
+  #repository-content { height: unset; margin-bottom: 10px; }
+  .wrapper { overflow: overlay; height: calc(100vh - 30px); }
+  #username, header h2 { display: none; } /* Some things look bad on mobile, so unless I refactor a lot of this CSS, we'll have to hide it for now */
+  #selectRepoWrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%)!important; }
+  #loginText { margin-bottom: 5px; height: fit-content!important; }
+  #selectRepo { margin-bottom: 5px; }
+}

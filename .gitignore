@@ -1,0 +1,5 @@
+# Ignore all npm-installed packages, such as Wrangler
+node_modules/
+
+# Ignore Wrangler config file
+wrangler.toml

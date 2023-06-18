@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>GitCMS</title>
+    <meta name="description" content="A simple & fast way to manage content hosted on GitHub!">
+    <meta name="color-scheme" content="light">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" defer>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.5/base64.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Code+Pro&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/codeflask@latest"></script>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 onclick="location.reload()">GitCMS</h1>
+        <h2 onclick="location.reload()"></h2>
+        <a id="username" class="hidden"></a>
+        <img src="" id="profileImg">
+        <a href="auth"><img src="icons/GitHub.svg" alt="GitHub" id="github"></a>
+        <a href="auth" id="login-button"><img src="icons/Login.svg" alt="Login Icon"></a>
+        <a href="/" id="logout-button" onclick="localStorage.clear();"><img src="icons/Logout.svg" alt="Logout Icon"></a>
+      </header>
+      <div id="selectRepoWrapper">
+        <p id="loginText"></p>
+        <input id="selectRepo" type="text">
+        <input id="selectBranch" placeholder='Enter branch here (like "master")' type="text">
+        <button onclick="selectRepo()" id="enterRepo"><img src="icons/ArrowRight.svg" alt="Enter Repository button"></button>
+      </div>
+      <button id="save-button" class="editorBtn saveBtn hidden" onclick="saveChanges()"><img src="icons/Save.svg" alt="Save Icon"></button>
+      <!--<button id="changeThemeBtn" class="editorBtn hidden" onclick="saveChanges()"><img src="icons/DarkTheme.svg" alt="Save Icon"></button>-->
+      <div class="hidden main">
+        <div id="repository-content"></div>
+        <div class="editArea">
+          <textarea id="file-contents"></textarea>
+          <div id="codeContents"></div>
+          <div id="mediaItems"></div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js" defer></script>
+  </body>
+</html>
