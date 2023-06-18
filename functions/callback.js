@@ -28,6 +28,6 @@ export async function onRequest({ request, env }) { // Handle callback & authori
       };
     }
 
-    const redirectUrl = `gitcms.pages.dev/?access_token=${content.token}`;
+    const redirectUrl = `https://gitcms.pages.dev/?access_token=${content.token}`;
     return Response.redirect(redirectUrl, 302);
 }
