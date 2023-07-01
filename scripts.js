@@ -73,8 +73,9 @@ if (url.searchParams.has('access_token')) {
       Array.from(document.querySelectorAll('.editorBtn')).forEach( (el) => el.classList.remove('hidden'));
       document.querySelector('.main').classList.remove('hidden');
       document.querySelector('.wrapper').classList.add('open');
+      document.title = 'GitCMS - Editing: ' + repo;
     } catch(err) { 
-      document.getElementById('loginText').innerHTML = `<strong>Error loading repository!</strong> Check if the repository "<a href="https://github.com/${account}/${repo}">https://github.com/${account}/${repo}</a>" and branch <strong>${branch}</strong> exists.<br>Please try again.`
+      document.getElementById('loginText').innerHTML = `<strong>Error loading repository!</strong> Check if the repository "<a href="https://github.com/${account}/${repo}">https://github.com/${account}/${repo}</a>" and branch <strong>${branch}</strong> exists.`
       document.querySelector('#selectRepoWrapper').classList.add('show');
       document.getElementById('loginText').classList.add('show');
       document.querySelector('header h2').innerHTML = '';
@@ -212,7 +213,7 @@ function selectRepo() {
   if (document.getElementById('selectBranch').value != '') { branch = document.getElementById('selectBranch').value; }
   document.querySelector('#selectRepoWrapper').classList.remove('show');
   document.getElementById('loginText').classList.remove('show');
-  document.querySelector('header h2').innerHTML = `Loading ${repo}...`;
+  //document.querySelector('header h2').innerHTML = `Loading ${repo}...`;
   document.getElementById('username').innerHTML = `Logged in as <strong>${account}</strong>`;
   document.getElementById('username').classList.remove('hidden');
   document.getElementById('username').href = `https://github.com/${account}`;
