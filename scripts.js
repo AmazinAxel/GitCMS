@@ -56,7 +56,8 @@ if (url.searchParams.has('access_token')) {
     this.classList.toggle('dirOpen');
   }  
 
-  async function loadRepository(repo, elementId) {
+  async function loadRepository() {
+    console.log(`Loading ${repo}...`);
     try { 
       const accessToken = localStorage.getItem('access_token');
       const response = await fetch(`https://api.github.com/repos/${account}/${repo}/git/trees/${branch}?recursive=1`, {
@@ -67,13 +68,14 @@ if (url.searchParams.has('access_token')) {
       });
       const data = await response.json();
       const tree = data.tree;
-      document.getElementById(elementId).innerHTML = generateList(tree);
+      document.getElementById('repository-content').innerHTML = generateList(tree);
       document.querySelector('header h2').innerHTML = `Editing <strong>${account}/${repo}</strong> on branch <strong>${branch}</strong>`;
       document.querySelector('header h2').setAttribute('onclick', `window.open("https://github.com/${account}/${repo}/tree/${branch}/", '_blank').focus();`);
       Array.from(document.querySelectorAll('.editorBtn')).forEach( (el) => el.classList.remove('hidden'));
       document.querySelector('.main').classList.remove('hidden');
       document.querySelector('.wrapper').classList.add('open');
       document.title = 'GitCMS - Editing: ' + repo;
+      console.log('Repository sucessfully loaded!');
     } catch(err) { 
       document.getElementById('loginText').innerHTML = `<strong>Error loading repository!</strong> Check if the repository "<a href="https://github.com/${account}/${repo}">https://github.com/${account}/${repo}</a>" and branch <strong>${branch}</strong> exists.`
       document.querySelector('#selectRepoWrapper').classList.add('show');
@@ -85,6 +87,7 @@ if (url.searchParams.has('access_token')) {
   let currentFilePath = '';
 
   function fetchFileContents(item, path) {
+    console.log('Fetching file contents with URL: https://api.github.com/repos/${account}/${repo}/contents/' + path);
     Array.from(document.querySelectorAll('.itemSelected')).forEach( (el) => el.classList.remove('itemSelected'));
     item.classList.add('itemSelected');
     document.querySelector('.editArea').classList.remove('showEditArea');
@@ -165,6 +168,7 @@ if (url.searchParams.has('access_token')) {
   }  
 
   async function saveChanges() {
+    console.log('Saving changes...');
     let message = prompt(`Enter commit message:
 (Enter nothing to use the default message: "Updated ${currentFilePath}")`);
     if (message == '') { message = `Updated ${currentFilePath}`; }
@@ -188,6 +192,7 @@ if (url.searchParams.has('access_token')) {
       },
       body: JSON.stringify({ message, content: encodedContent, sha: fileSha, branch })
     });
+    console.log('Changes successfully saved!')
   }
   
   function login() {
@@ -205,8 +210,13 @@ if (url.searchParams.has('access_token')) {
         document.getElementById('selectRepo').placeholder = 'Enter repository here (like "AmazinAxel/Site")'
   }}
   login();
-  document.getElementById('selectRepoWrapper').classList.add('show');
-  document.getElementById('loginText').classList.add('show');
+  if (account == "AmazinAxel") {
+    document.querySelector('.blogselector').classList.remove('hidden');
+    document.getElementById('loginText').classList.add('show');  
+  } else {
+    document.getElementById('selectRepoWrapper').classList.add('show');
+    document.getElementById('loginText').classList.add('show');  
+  }
 
 function selectRepo() {
   repo = document.getElementById('selectRepo').value;
@@ -214,13 +224,34 @@ function selectRepo() {
   document.querySelector('#selectRepoWrapper').classList.remove('show');
   document.getElementById('loginText').classList.remove('show');
   //document.querySelector('header h2').innerHTML = `Loading ${repo}...`;
-  document.getElementById('username').innerHTML = `Logged in as <strong>${account}</strong>`;
+  if (account != 'unknown') { document.getElementById('username').innerHTML = `Logged in as <strong>${account}</strong>`; }
   document.getElementById('username').classList.remove('hidden');
   document.getElementById('username').href = `https://github.com/${account}`;
-  loadRepository(repo, 'repository-content');
+  if (account == 'AmazinAxel') {
+    if (repo.toLowerCase(repo) == 'site') { openBlogEditor(); return; }
+  }
+  loadRepository();
 }
 
 document.onkeyup = function(e){ if(e.key == 'Enter'){ // On enter key press while selecting repo, submit it
     if (!document.querySelector('header h2').innerHTML.includes('Editing')) { selectRepo(); }
   }
+}
+// The blog editor allows you to quickly & easily create blog posts, modify code below to make it work with your CMS!
+function openBlogEditor() {
+  console.log('Blog CMS editor opened!')
+  // First, ask editor if they want to create an SWR post or an announcement
+  // Then open up a GUI allowing you to input an optional title and markdown formatted post
+  // Then, click the save button to save it and then allow you to preview it
+  // Include options for switching to a file viewer and allow changing to announcements editor.
+  // You should be able to see past SWRs and announcements by parsing the file, have a similar UI to CP
+  // You should also be able to add images and media easily & quickly, including changing the name & pasting it into markdown format
+
+  // Blog editor should allow you to change the post category, add a tag, meta description, images, and more (add to boba blog too!!)
+  // Landing site editor should show a disclaimer Just In Case(tm)
+
+  // Add a quick thing to make it so when logged in as amazinaxel, automagically open up a menu
+  // that allows you to quickly start creating an SWR post, but give an option to create an announcement post or go edit the boba blog or devblog
+  // also have a quick toggle option that allows you to switch to a filemanager if ever needed
+  // If it detects that its monday, quickload the SWR editor page so its the first thing thats shown
 }

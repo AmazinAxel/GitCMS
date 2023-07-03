@@ -5,7 +5,7 @@ but right now I'm just leaving this as is. Some parts of this code is fantastic 
 however, it really does just need a good refactoring. Good luck reading this! */
 
 /* Main body styles */
-body { 
+body {
   font-family: 'Montserrat', 'Source Sans', sans-serif;
   background: rgb(226,227,244);
   background: linear-gradient(180deg, rgba(226,227,244,1) 0%, rgba(194,199,243,1) 100%);
@@ -34,6 +34,11 @@ button:active {
   box-shadow: 1px 1px 9px 0px #1884d1;
   transform: translate(0, 2px);
 }
+.buttonList { list-style: none; }
+.buttonList li button {
+  margin-bottom: 8px;
+  padding: 10px; 
+}
 
 input {
   font-family: 'Montserrat', 'Source Sans', sans-serif;
@@ -61,7 +66,7 @@ input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; 
 }
 .open.wrapper { height: calc(100vh - 30px); }
 
-#selectRepoWrapper, #loginText { 
+#selectRepoWrapper, #loginText, .blogselector { 
   text-align: center; 
   transition: transform .4s cubic-bezier(0.5, 0, 0, 1), opacity .4s ease, visibility .4s, height .4s cubic-bezier(0.5, 0, 0, 1), margin .4s cubic-bezier(0.5, 0, 0, 1), scale .3s ease;
   transform: translate(0, 20px); 
@@ -71,15 +76,14 @@ input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; 
   margin-top: 10px;
   scale: 0.8;
 }
-#selectRepoWrapper.show, #loginText.show { opacity: 1; transform: translate(0, -5px); visibility: visible; height: 20px; scale: 1; }
+#selectRepoWrapper.show, #loginText.show, .blogselector { opacity: 1; transform: translate(0, 0px); visibility: visible; height: 20px; scale: 1; }
 
-.saveBtn, .main { 
+.saveBtn, .filemanager { 
   visibility: visible;
   transform: translate(0, 0);
   opacity: 1;
   transition: transform .4s cubic-bezier(0.5, 0, 0, 1), opacity .4s ease, visibility .4s, box-shadow .4s ease;
  }
- .hidden.saveBtn, .hidden.main, .hidden#changeThemeBtn, .hidden#username { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
 
  .saveBtn { margin-left: auto; display: flex; justify-content: flex-end; margin-bottom: 10px; margin-top: 5px; }
  .saveBtn img { position: relative; top: 0; }
@@ -105,7 +109,7 @@ header h1 { flex: 0%; cursor: pointer; }
   opacity: 1;
   transition: visibility .6s, transform .6s cubic-bezier(0, 0, 0, 1), opacity .6s cubic-bezier(0, 0, 0, 1);
   position: relative;
-  left: 22px; 
+  left: -5px; 
 }
 header h2 { 
   position: absolute;
@@ -133,8 +137,8 @@ a, header h1 { color: black; transition: color .2s ease; text-decoration: none; 
 a:hover, header h1:hover { color: #292929 }
 a:active, header h1:active { color: #4b4b4b }
 
-/* Main app styling */
-.main { display: flex; gap: 10px; height: calc(100vh - 150px); }
+/* Main file manager styling */
+.filemanager { display: flex; gap: 10px; height: calc(100vh - 150px); }
 #repository-content { 
   height: 100%; 
   background-color: white; 
@@ -201,6 +205,7 @@ li { cursor: pointer; }
 img { max-width: 100%; }
 object { max-width: 50%; }
 
+.hidden { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
 
 /* Reset all styles (mostly minifed) */
 html { box-sizing: border-box; }
@@ -217,11 +222,11 @@ img, video { display: block; max-width: 100%; }
 p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; color: var(--complimentary); transition: color .2s ease; }
 
 @media(max-width: 900px) {
-  .main { display: unset; }
+  .filemanager { display: unset; }
   #repository-content { height: unset; margin-bottom: 10px; }
   .wrapper { overflow: overlay; height: calc(100vh - 30px); }
   #username, header h2 { display: none; } /* Some things look bad on mobile, so unless I refactor a lot of this CSS, we'll have to hide it for now */
-  #selectRepoWrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%)!important; }
+  #selectRepoWrapper, .blogselector { transform: translate(0, 35vh)!important; }
   #loginText { margin-bottom: 5px; height: fit-content!important; }
   #selectRepo { margin-bottom: 5px; }
 }

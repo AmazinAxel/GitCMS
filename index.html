@@ -36,13 +36,31 @@
       </div>
       <button id="save-button" class="editorBtn saveBtn hidden" onclick="saveChanges()"><img src="icons/Save.svg" alt="Save Icon"></button>
       <!--<button id="changeThemeBtn" class="editorBtn hidden" onclick="saveChanges()"><img src="icons/DarkTheme.svg" alt="Save Icon"></button>-->
-      <div class="hidden main">
+      <div class="hidden filemanager">
         <div id="repository-content"></div>
         <div class="editArea">
           <textarea id="file-contents"></textarea>
           <div id="codeContents"></div>
           <div id="mediaItems"></div>
         </div>
+      </div>
+      <div class="hidden blogselector">
+        <h2>What would you like to create today?</h2>
+        <ul class="buttonList">
+          <li><button class="buttonList" onclick="">SWR Post</button></li>
+          <li><button class="buttonList" onclick="">Announcement Post</button></li>
+          <li><button class="buttonList" onclick="">Blog Post</button></li>
+          <li><button class="buttonList" onclick="">Boba Post</button></li>
+        </ul>
+      </div>
+      <div class="hidden blogeditor">
+        <h1>Editing SWR 2023</h1>
+        <textarea>Title: </textarea>
+        <textarea>Description: </textarea>
+        <textarea>Text!</textarea>
+        <h2>Previous Posts:</h2>
+        <button>Add Media</button>
+        <button>Add Tag</button>
       </div>
     </div>
     <script src="scripts.js" defer></script>

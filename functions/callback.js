@@ -28,6 +28,6 @@ export async function onRequest({ request, env }) { // Handle callback & authori
       };
     }
 
-    const redirectUrl = `https://gitcms.amazinaxel.com/?access_token=${content.token}`;
+    const redirectUrl = `http://127.0.0.1:8788/?access_token=${content.token}`;
     return Response.redirect(redirectUrl, 302);
 }
