@@ -211,6 +211,11 @@ if (url.searchParams.has('access_token')) {
   }}
   login();
   if (account == "AmazinAxel") {
+    document.getElementById('loginText').classList.add('force');
+    document.getElementById('selectBranch').classList.add('force');
+    document.getElementById('selectRepo').classList.add('force');
+    document.getElementById('enterRepo').classList.add('force');
+
     document.querySelector('.blogselector').classList.remove('hidden');
     document.getElementById('loginText').classList.add('show');  
   } else {
@@ -240,6 +245,8 @@ document.onkeyup = function(e){ if(e.key == 'Enter'){ // On enter key press whil
 // The blog editor allows you to quickly & easily create blog posts, modify code below to make it work with your CMS!
 function openBlogEditor() {
   console.log('Blog CMS editor opened!')
+  document.querySelector('#selectRepoWrapper').classList.remove('show');
+  document.getElementById('loginText').classList.remove('show');
   // First, ask editor if they want to create an SWR post or an announcement
   // Then open up a GUI allowing you to input an optional title and markdown formatted post
   // Then, click the save button to save it and then allow you to preview it
@@ -254,4 +261,15 @@ function openBlogEditor() {
   // that allows you to quickly start creating an SWR post, but give an option to create an announcement post or go edit the boba blog or devblog
   // also have a quick toggle option that allows you to switch to a filemanager if ever needed
   // If it detects that its monday, quickload the SWR editor page so its the first thing thats shown
+}
+
+function revertToClassic() {
+  document.getElementById('selectRepoWrapper').classList.add('show'); 
+  document.getElementById('loginText').classList.add('show');
+  document.querySelector('.blogselector').classList.add('hidden');
+
+  document.getElementById('loginText').classList.remove('force');
+    document.getElementById('selectBranch').classList.remove('force');
+    document.getElementById('selectRepo').classList.remove('force');
+    document.getElementById('enterRepo').classList.remove('force');
 }

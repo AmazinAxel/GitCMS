@@ -1,0 +1,12 @@
+{
+  "name": "gitcms",
+  "version": "1.0.0",
+  "description": "Welcome to GitCMS, a Git-based, JAMstack-compatible CMS that allows you to easily, simply, and efficently manage the content of your site for free.",
+  "main": "scripts.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

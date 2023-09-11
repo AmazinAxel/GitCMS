@@ -13,6 +13,8 @@ body {
   overflow: hidden;
   padding: 15px;
   background-attachment: fixed;
+  max-width: 1400px;
+  margin: auto;
 }
 
 button { 
@@ -37,7 +39,7 @@ button:active {
 .buttonList { list-style: none; }
 .buttonList li button {
   margin-bottom: 8px;
-  padding: 10px; 
+  padding: 10px 20px; 
 }
 
 input {
@@ -52,7 +54,7 @@ input {
   width: 236px;
 }
 button img { width: 20px; position: relative; width: 25px; }
-#enterRepo { position: relative; top: 8px; }
+#enterRepo { position: relative; top: 7.5px; }
 input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; transform: translate(0, -1px); }
 ::placeholder { color: #d0e6fa; }
 
@@ -60,7 +62,7 @@ input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; 
   background-color: #ffffffad;
   padding: 15px;
   border-radius: 10px;
-  height: 140px;
+  height: 180px;
   transition: height .4s cubic-bezier(0.5, 0, 0, 1);
   overflow: hidden;
 }
@@ -101,15 +103,17 @@ header h1 { flex: 0%; cursor: pointer; }
   cursor: pointer;
   box-shadow: 0px 0px 0px black;
   transition: transform .2s ease, box-shadow .2s ease;
+  margin-top: 7px; /* Center alignment */
 }
 #username { 
-  margin: 1px;
+  margin: 4px;
   visibility: visible;
   transform: translate(0, 0px);
   opacity: 1;
   transition: visibility .6s, transform .6s cubic-bezier(0, 0, 0, 1), opacity .6s cubic-bezier(0, 0, 0, 1);
   position: relative;
-  left: -5px; 
+  left: -5px;
+  margin-top: 9px;
 }
 header h2 { 
   position: absolute;
@@ -122,14 +126,14 @@ header h2 {
 }
 header h2:hover { color: #585858; }
 header h2:active { color: #464646 }
-#github { padding-right: 3px; transition: transform .3s ease; }
+#github { padding-right: 3px; transition: transform .3s ease; margin-top: 7px; }
 #github:hover { transform: translate(0, -3px); }
 #github:active { transform: translate(0, 2px); }
 
 #profileImg:hover { transform: translate(0, -3px); box-shadow: 1px 4px 7px 0px #a3a3a3; }
 #profileImg:active { transform: translate(0, 2px); box-shadow: 1px 1px 7px 0px #a3a3a3; }
 
-#logout-button, #login-button { transition: transform .2s ease; transform: translate(0px, 0px); }
+#logout-button, #login-button { transition: transform .2s ease; transform: translate(0px, 0px); margin-top: 7px; }
 #logout-button:hover, #login-button:hover { transform: translate(2px, 0); }
 #logout-button:active, #login-button:active { transform: translate(5px, 0); }
 
@@ -206,6 +210,7 @@ img { max-width: 100%; }
 object { max-width: 50%; }
 
 .hidden { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
+.force { display: none; } /* Doesn't animate when force hidden enabled */
 
 /* Reset all styles (mostly minifed) */
 html { box-sizing: border-box; }
@@ -229,4 +234,11 @@ p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; color: var(--complimentar
   #selectRepoWrapper, .blogselector { transform: translate(0, 35vh)!important; }
   #loginText { margin-bottom: 5px; height: fit-content!important; }
   #selectRepo { margin-bottom: 5px; }
+  .blogselector h2 { margin-bottom: 10px; }
+}
+
+@media(min-width: 900px) {
+  .buttonList { display: flex; justify-content: center; gap: 5px } 
+  .blogselector h2 { display: none; }
+  .blogselector { margin-top: 0; }
 }

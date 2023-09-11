@@ -47,10 +47,11 @@
       <div class="hidden blogselector">
         <h2>What would you like to create today?</h2>
         <ul class="buttonList">
-          <li><button class="buttonList" onclick="">SWR Post</button></li>
-          <li><button class="buttonList" onclick="">Announcement Post</button></li>
-          <li><button class="buttonList" onclick="">Blog Post</button></li>
-          <li><button class="buttonList" onclick="">Boba Post</button></li>
+          <li><button class="buttonList" onclick="revertToClassic()">GitCMS Classic</button></li>
+          <li><button class="buttonList" onclick="openBlogEditor('SWR')">SWR Post</button></li>
+          <li><button class="buttonList" onclick="openBlogEditor('Announcement')">Announcement Post</button></li>
+          <li><button class="buttonList" onclick="openBlogEditor('Blog')">Blog Post</button></li>
+          <li><button class="buttonList" onclick="openBlogEditor('Boba')">Boba Blog Post</button></li>
         </ul>
       </div>
       <div class="hidden blogeditor">
