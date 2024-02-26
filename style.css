@@ -58,7 +58,7 @@ button img { width: 20px; position: relative; width: 25px; }
 input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; transform: translate(0, -1px); }
 ::placeholder { color: #d0e6fa; }
 
-.wrapper { 
+#wrapper { 
   background-color: #ffffffad;
   padding: 15px;
   border-radius: 10px;
@@ -66,9 +66,9 @@ input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; 
   transition: height .4s cubic-bezier(0.5, 0, 0, 1);
   overflow: hidden;
 }
-.open.wrapper { height: calc(100vh - 30px); }
+.open#wrapper { height: calc(100vh - 30px); }
 
-#selectRepoWrapper, #loginText, .blogselector { 
+#selectRepoWrapper, #loginText, #blogselector { 
   text-align: center; 
   transition: transform .4s cubic-bezier(0.5, 0, 0, 1), opacity .4s ease, visibility .4s, height .4s cubic-bezier(0.5, 0, 0, 1), margin .4s cubic-bezier(0.5, 0, 0, 1), scale .3s ease;
   transform: translate(0, 20px); 
@@ -78,7 +78,7 @@ input:focus { border: 0; outline: none; box-shadow: 2px 4px 15px 0px #1884d1a3; 
   margin-top: 10px;
   scale: 0.8;
 }
-#selectRepoWrapper.show, #loginText.show, .blogselector { opacity: 1; transform: translate(0, 0px); visibility: visible; height: 20px; scale: 1; }
+#selectRepoWrapper.show, #loginText.show, #blogselector { opacity: 1; transform: translate(0, 0px); visibility: visible; height: 20px; scale: 1; }
 
 .saveBtn, .filemanager { 
   visibility: visible;
@@ -115,7 +115,7 @@ header h1 { flex: 0%; cursor: pointer; }
   left: -5px;
   margin-top: 9px;
 }
-header h2 { 
+#headerSubtitle { 
   position: absolute;
   color: rgb(121, 121, 121);
   font-size: 15px;
@@ -124,8 +124,8 @@ header h2 {
   cursor: pointer;
   transition: color .2s ease;
 }
-header h2:hover { color: #585858; }
-header h2:active { color: #464646 }
+#headerSubtitle:hover { color: #585858; }
+#headerSubtitle:active { color: #464646 }
 #github { padding-right: 3px; transition: transform .3s ease; margin-top: 7px; }
 #github:hover { transform: translate(0, -3px); }
 #github:active { transform: translate(0, 2px); }
@@ -142,7 +142,7 @@ a:hover, header h1:hover { color: #292929 }
 a:active, header h1:active { color: #4b4b4b }
 
 /* Main file manager styling */
-.filemanager { display: flex; gap: 10px; height: calc(100vh - 150px); }
+#filemanager { display: flex; gap: 10px; height: calc(100vh - 150px); }
 #repository-content { 
   height: 100%; 
   background-color: white; 
@@ -199,8 +199,8 @@ li.dropdown.dirOpen > .dropdown-content:not(li) { max-height: 500px; opacity: 1;
 #file-contents:focus { outline: none; transform: translate(0px, -3px); box-shadow: 1px 4px 7px 0px #a3a3a3; }
 ul { padding-left: 15px; }
 textarea { font-family: 'Source Code Pro', monospace; }
-.editArea { width: 100%; opacity: 0; transition: opacity .3s ease, transform .3s ease; transform: translate(10px, 0); flex: 80%; }
-.showEditArea { opacity: 1; transform: translate(0px, 0); animation: slideIn 0.5s ease; }
+#editArea { width: 100%; opacity: 0; transition: opacity .3s ease, transform .3s ease; transform: translate(10px, 0); flex: 80%; }
+#editArea.showEditArea { opacity: 1; transform: translate(0px, 0); animation: slideIn 0.5s ease; }
 li { cursor: pointer; }
 .CodeMirror { height: calc(100% - 50px); } /* Markdown Editor */
 .editor-statusbar { display: none; } /* Markdown Editor */
@@ -209,7 +209,7 @@ li { cursor: pointer; }
 img { max-width: 100%; }
 object { max-width: 50%; }
 
-.hidden { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
+.hidden, #blogselector.hidden { visibility: hidden; transform: translate(0, 20px); opacity: 0; height: 0px; }
 .force { display: none; } /* Doesn't animate when force hidden enabled */
 
 /* Reset all styles (mostly minifed) */
@@ -223,22 +223,22 @@ sup { top: -0.5em; }
 button, input, select, textarea { line-height: 1.15; }
 button, select { text-transform: none; }
 * { margin: 0; }
-img, video { display: block; max-width: 100%; }
+img, video { display: block; max-width: 100%; border-radius: 6px; }
 p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; color: var(--complimentary); transition: color .2s ease; }
 
 @media(max-width: 900px) {
   .filemanager { display: unset; }
   #repository-content { height: unset; margin-bottom: 10px; }
-  .wrapper { overflow: overlay; height: calc(100vh - 30px); }
-  #username, header h2 { display: none; } /* Some things look bad on mobile, so unless I refactor a lot of this CSS, we'll have to hide it for now */
-  #selectRepoWrapper, .blogselector { transform: translate(0, 35vh)!important; }
+  #wrapper { overflow: overlay; height: calc(100vh - 30px); }
+  #username, #headerSubtitle { display: none; } /* Some things look bad on mobile, so unless I refactor a lot of this CSS, we'll have to hide it for now */
+  #selectRepoWrapper, #blogselector { transform: translate(0, 35vh)!important; }
   #loginText { margin-bottom: 5px; height: fit-content!important; }
   #selectRepo { margin-bottom: 5px; }
-  .blogselector h2 { margin-bottom: 10px; }
+  #blogselector h2 { margin-bottom: 10px; }
 }
 
 @media(min-width: 900px) {
   .buttonList { display: flex; justify-content: center; gap: 5px } 
-  .blogselector h2 { display: none; }
-  .blogselector { margin-top: 0; }
+  #blogselector h2 { display: none; }
+  #blogselector { margin-top: 0; }
 }

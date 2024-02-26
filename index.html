@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <div class="wrapper">
+    <div id="wrapper">
       <header>
         <h1 onclick="location.reload()">GitCMS</h1>
-        <h2 onclick="location.reload()"></h2>
+        <h2 onclick="location.reload()" id="headerSubtitle"></h2>
         <a id="username" class="hidden"></a>
         <img src="" id="profileImg">
         <a href="auth"><img src="icons/GitHub.svg" alt="GitHub" id="github"></a>
@@ -31,20 +31,20 @@
       <div id="selectRepoWrapper">
         <p id="loginText"></p>
         <input id="selectRepo" type="text">
-        <input id="selectBranch" placeholder='Enter branch here (like "master")' type="text">
+        <input id="selectBranch" placeholder='Enter branch here (like "main")' type="text">
         <button onclick="selectRepo()" id="enterRepo"><img src="icons/ArrowRight.svg" alt="Enter Repository button"></button>
       </div>
       <button id="save-button" class="editorBtn saveBtn hidden" onclick="saveChanges()"><img src="icons/Save.svg" alt="Save Icon"></button>
       <!--<button id="changeThemeBtn" class="editorBtn hidden" onclick="saveChanges()"><img src="icons/DarkTheme.svg" alt="Save Icon"></button>-->
-      <div class="hidden filemanager">
+      <div id="filemanager" class="hidden">
         <div id="repository-content"></div>
-        <div class="editArea">
+        <div id="editArea">
           <textarea id="file-contents"></textarea>
           <div id="codeContents"></div>
           <div id="mediaItems"></div>
         </div>
       </div>
-      <div class="hidden blogselector">
+      <div id="blogselector" class="hidden">
         <h2>What would you like to create today?</h2>
         <ul class="buttonList">
           <li><button class="buttonList" onclick="revertToClassic()">GitCMS Classic</button></li>
@@ -54,7 +54,8 @@
           <li><button class="buttonList" onclick="openBlogEditor('Boba')">Boba Blog Post</button></li>
         </ul>
       </div>
-      <div class="hidden blogeditor">
+      <!-- not finished -->
+      <div id="blogeditor" class="hidden">
         <h1>Editing SWR 2023</h1>
         <textarea>Title: </textarea>
         <textarea>Description: </textarea>

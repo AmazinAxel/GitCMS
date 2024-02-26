@@ -5,10 +5,10 @@ This script is in dire need of a recode. Like, seriously. But I don't feel like 
 have to bear with me when reading this code. Good luck! */
 
 let account = 'unknown';
-let repo = '';
+let repo = 'Site';
 let simplemde = '';
 let flask = '';
-let branch = 'master';
+let branch = 'main';
 
 // Handle the callback from GitHub
 const url = new URL(window.location.href);
@@ -69,18 +69,20 @@ if (url.searchParams.has('access_token')) {
       const data = await response.json();
       const tree = data.tree;
       document.getElementById('repository-content').innerHTML = generateList(tree);
-      document.querySelector('header h2').innerHTML = `Editing <strong>${account}/${repo}</strong> on branch <strong>${branch}</strong>`;
-      document.querySelector('header h2').setAttribute('onclick', `window.open("https://github.com/${account}/${repo}/tree/${branch}/", '_blank').focus();`);
-      Array.from(document.querySelectorAll('.editorBtn')).forEach( (el) => el.classList.remove('hidden'));
-      document.querySelector('.main').classList.remove('hidden');
-      document.querySelector('.wrapper').classList.add('open');
+      document.getElementById('headerSubtitle').innerHTML = `Editing <strong>${account}/${repo}</strong> on branch <strong>${branch}</strong>`;
+      document.getElementById('headerSubtitle').setAttribute('onclick', `window.open("https://github.com/${account}/${repo}/tree/${branch}/", '_blank').focus();`);
+      document.getElementById('save-button').classList.remove('hidden');
+      document.getElementById('wrapper').classList.add('open');
+      document.getElementById('editArea').classList.remove('hidden');
+      document.getElementById('filemanager').classList.remove('hidden');
       document.title = 'GitCMS - Editing: ' + repo;
       console.log('Repository sucessfully loaded!');
     } catch(err) { 
       document.getElementById('loginText').innerHTML = `<strong>Error loading repository!</strong> Check if the repository "<a href="https://github.com/${account}/${repo}">https://github.com/${account}/${repo}</a>" and branch <strong>${branch}</strong> exists.`
-      document.querySelector('#selectRepoWrapper').classList.add('show');
+      document.getElementById('selectRepoWrapper').classList.add('show');
       document.getElementById('loginText').classList.add('show');
-      document.querySelector('header h2').innerHTML = '';
+      document.getElementById('headerSubtitle').innerHTML = '';
+      console.log(err);
    }
   } 
 
@@ -90,7 +92,7 @@ if (url.searchParams.has('access_token')) {
     console.log('Fetching file contents with URL: https://api.github.com/repos/${account}/${repo}/contents/' + path);
     Array.from(document.querySelectorAll('.itemSelected')).forEach( (el) => el.classList.remove('itemSelected'));
     item.classList.add('itemSelected');
-    document.querySelector('.editArea').classList.remove('showEditArea');
+    document.getElementById('editArea').classList.remove('showEditArea');
     const accessToken = localStorage.getItem('access_token');
     const options = { method: "GET", headers: { "User-Agent": "request", "Authorization": `Bearer ${accessToken}` } };
     // These variables are file types & languages that CodeFlask supports natively
@@ -103,7 +105,7 @@ if (url.searchParams.has('access_token')) {
         const fileContents = document.getElementById('file-contents');
         const codeContents = document.getElementById('codeContents');
         const mediaItems = document.getElementById('mediaItems');
-        document.querySelector('.editArea').classList.add('showEditArea');
+        document.getElementById('editArea').classList.add('showEditArea');
         if (simplemde != '') { simplemde.toTextArea(); simplemde = ''; } // Probably should optimize this
         if (path.includes('.md')) { 
           const existingMediaElement = mediaItems.querySelector('img, video, object, audio');
@@ -210,42 +212,41 @@ if (url.searchParams.has('access_token')) {
         document.getElementById('selectRepo').placeholder = 'Enter repository here (like "AmazinAxel/Site")'
   }}
   login();
-  if (account == "AmazinAxel") {
+  if (account == "AmazinAxele") {
     document.getElementById('loginText').classList.add('force');
     document.getElementById('selectBranch').classList.add('force');
     document.getElementById('selectRepo').classList.add('force');
     document.getElementById('enterRepo').classList.add('force');
 
-    document.querySelector('.blogselector').classList.remove('hidden');
+    document.getElementById('blogselector').classList.remove('hidden');
     document.getElementById('loginText').classList.add('show');  
   } else {
     document.getElementById('selectRepoWrapper').classList.add('show');
     document.getElementById('loginText').classList.add('show');  
-  }
+}
 
 function selectRepo() {
   repo = document.getElementById('selectRepo').value;
   if (document.getElementById('selectBranch').value != '') { branch = document.getElementById('selectBranch').value; }
-  document.querySelector('#selectRepoWrapper').classList.remove('show');
+  document.getElementById('selectRepoWrapper').classList.remove('show');
   document.getElementById('loginText').classList.remove('show');
-  //document.querySelector('header h2').innerHTML = `Loading ${repo}...`;
   if (account != 'unknown') { document.getElementById('username').innerHTML = `Logged in as <strong>${account}</strong>`; }
   document.getElementById('username').classList.remove('hidden');
   document.getElementById('username').href = `https://github.com/${account}`;
-  if (account == 'AmazinAxel') {
+  if (account == 'AmazinAxele') {
     if (repo.toLowerCase(repo) == 'site') { openBlogEditor(); return; }
   }
   loadRepository();
 }
 
 document.onkeyup = function(e){ if(e.key == 'Enter'){ // On enter key press while selecting repo, submit it
-    if (!document.querySelector('header h2').innerHTML.includes('Editing')) { selectRepo(); }
+    if (!document.getElementById('headerSubtitle').innerHTML.includes('Editing')) { selectRepo(); }
   }
 }
 // The blog editor allows you to quickly & easily create blog posts, modify code below to make it work with your CMS!
 function openBlogEditor() {
   console.log('Blog CMS editor opened!')
-  document.querySelector('#selectRepoWrapper').classList.remove('show');
+  document.getElementById('selectRepoWrapper').classList.remove('show');
   document.getElementById('loginText').classList.remove('show');
   // First, ask editor if they want to create an SWR post or an announcement
   // Then open up a GUI allowing you to input an optional title and markdown formatted post
@@ -266,7 +267,7 @@ function openBlogEditor() {
 function revertToClassic() {
   document.getElementById('selectRepoWrapper').classList.add('show'); 
   document.getElementById('loginText').classList.add('show');
-  document.querySelector('.blogselector').classList.add('hidden');
+  document.getElementById('blogselector').classList.add('hidden');
 
   document.getElementById('loginText').classList.remove('force');
     document.getElementById('selectBranch').classList.remove('force');
